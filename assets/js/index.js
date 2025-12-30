@@ -2,7 +2,7 @@
 const nasaApiKey = "e1S0uOy1izehR795UEWjAQwGLVRoVstyEGBSvkAo";
 const apodBaseUrl = "https://api.nasa.gov/planetary/apod";
 const upcomingLaunchesUrl = "https://lldev.thespacedevs.com/2.3.0/launches/upcoming/";
-const planetsApi = "https://solar-system-opendata-proxy.vercel.app/api/planets";
+const planetApi = "https://solar-system-opendata-proxy.vercel.app/api/planets";
 
 let allPlanetsData = [];
 let allLaunchesData = [];
@@ -97,7 +97,7 @@ async function fetchAstronomyPicture(specificDate = null) {
 
 async function fetchPlanetsData() {
     try {
-        const response = await fetch(planetsApi);
+        const response = await fetch(planetApi);
         const data = await response.json();
         
         allPlanetsData = data.bodies.filter(body => body.isPlanet === true);
@@ -483,6 +483,7 @@ window.addEventListener("load", function() {
     fetchPlanetsData();
     fetchUpcomingLaunches();
 });
+
 
 
 
