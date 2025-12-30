@@ -2,6 +2,7 @@
 const nasaApiKey = "e1S0uOy1izehR795UEWjAQwGLVRoVstyEGBSvkAo";
 const apodBaseUrl = "https://api.nasa.gov/planetary/apod";
 const upcomingLaunchesUrl = "https://lldev.thespacedevs.com/2.3.0/launches/upcoming/";
+const planetsApi = "https:solar-system-opendata-proxy.vercel.app/api/planets";
 let allPlanetsData = [];
 let allLaunchesData = [];
 
@@ -95,7 +96,7 @@ async function fetchAstronomyPicture(specificDate = null) {
 
 async function fetchPlanetsData() {
     try {
-        const response = await fetch("https:solar-system-opendata-proxy.vercel.app/api/planets");
+        const response = await fetch(planetsApi);
         const data = await response.json();
         
         allPlanetsData = data.bodies.filter(body => body.isPlanet === true);
@@ -261,7 +262,7 @@ function renderLaunchesGrid() {
         return `
             <div class="bg-slate-800/50 border border-slate-700 rounded-2xl overflow-hidden hover:border-blue-500/30 transition-all group cursor-pointer">
                 <div class="relative h-48 overflow-hidden bg-slate-900/50">
-                    <img src="${thumbUrl || '/assets/images/launch-placeholder.png'}" class="w-full h-full object-cover group-hover:scale-110 transition-transform" />
+                    <img src="${thumbUrl || './assets/images/launch-placeholder.png'}" class="w-full h-full object-cover group-hover:scale-110 transition-transform" />
                     <div class="absolute top-3 right-3">
                         <span class="px-3 py-1 bg-${statusColor}-500/90 text-white rounded-full text-xs font-semibold">${launch.status?.abbrev || "TBD"}</span>
                     </div>
@@ -285,7 +286,7 @@ function renderPlanetsGrid() {
     if (!grid) return;
 
     const planetColors = { mercury: "#eab308", venus: "#f97316", earth: "#3b82f6", mars: "#ef4444", jupiter: "#fb923c", saturn: "#facc15", uranus: "#06b6d4", neptune: "#2563eb" };
-    const planetImages = { mercury: "/assets/images/mercury.png", venus: "/assets/images/venus.png", earth: "/assets/images/earth.png", mars: "/assets/images/mars.png", jupiter: "/assets/images/jupiter.png", saturn: "/assets/images/saturn.png", uranus: "/assets/images/uranus.png", neptune: "/assets/images/neptune.png" };
+    const planetImages = { mercury: "./assets/images/mercury.png", venus: "./assets/images/venus.png", earth: "./assets/images/earth.png", mars: "./assets/images/mars.png", jupiter: "./assets/images/jupiter.png", saturn: "./assets/images/saturn.png", uranus: "./assets/images/uranus.png", neptune: "./assets/images/neptune.png" };
 
     grid.innerHTML = allPlanetsData.map(planet => {
         const nameLower = planet.englishName.toLowerCase();
@@ -345,7 +346,7 @@ function renderPlanetsComparisonTable() {
 
 function displayPlanetDetails(planet) {
     const nameLower = planet.englishName.toLowerCase();
-    const planetImages = { mercury: "/assets/images/mercury.png", venus: "/assets/images/venus.png", earth: "/assets/images/earth.png", mars: "/assets/images/mars.png", jupiter: "/assets/images/jupiter.png", saturn: "/assets/images/saturn.png", uranus: "/assets/images/uranus.png", neptune: "/assets/images/neptune.png" };
+    const planetImages = { mercury: "./assets/images/mercury.png", venus: "./assets/images/venus.png", earth: "./assets/images/earth.png", mars: "./assets/images/mars.png", jupiter: "./assets/images/jupiter.png", saturn: "./assets/images/saturn.png", uranus: "./assets/images/uranus.png", neptune: "./assets/images/neptune.png" };
 
     const imgEl = document.getElementById("planet-detail-image");
     if (imgEl) { imgEl.src = planetImages[nameLower] || ""; imgEl.alt = planet.englishName; }
@@ -481,5 +482,6 @@ window.addEventListener("load", function() {
     fetchPlanetsData();
     fetchUpcomingLaunches();
 });
+
 
 
