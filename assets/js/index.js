@@ -2,7 +2,7 @@
 const nasaApiKey = "e1S0uOy1izehR795UEWjAQwGLVRoVstyEGBSvkAo";
 const apodBaseUrl = "https://api.nasa.gov/planetary/apod";
 const upcomingLaunchesUrl = "https://lldev.thespacedevs.com/2.3.0/launches/upcoming/";
-const planetsApi = "https:solar-system-opendata-proxy.vercel.app/api/planets";
+const planetsApi = "https://solar-system-opendata-proxy.vercel.app/api/planets";
 let allPlanetsData = [];
 let allLaunchesData = [];
 
@@ -482,6 +482,7 @@ window.addEventListener("load", function() {
     fetchPlanetsData();
     fetchUpcomingLaunches();
 });
+
 
 
 
