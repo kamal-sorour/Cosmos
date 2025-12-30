@@ -1,12 +1,17 @@
 // WRITE YOUR JS CODE HERE
+const nasaApiKey = "e1S0uOy1izehR795UEWjAQwGLVRoVstyEGBSvkAo";
+const apodBaseUrl = "https://api.nasa.gov/planetary/apod";
 
 let allPlanetsData = [];
 let allLaunchesData = [];
 
 async function fetchAstronomyPicture(specificDate = null) {
     try {
-
-        const response = await fetch(`https:api.nasa.gov/planetary/apod?api_key=e1S0uOy1izehR795UEWjAQwGLVRoVstyEGBSvkAo&date=${specificDate}`);
+        let finalUrl = `${apodBaseUrl}?api_key=${nasaApiKey}`;
+        if (specificDate) {
+            finalUrl = finalUrl + `&date=${specificDate}`;
+        }
+        const response = await fetch(finalUrl);
         const data = await response.json();
 
         const imageContainer = document.getElementById("apod-image-container");
@@ -476,3 +481,4 @@ window.addEventListener("load", function() {
     fetchPlanetsData();
     fetchUpcomingLaunches();
 });
+
