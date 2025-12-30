@@ -1,7 +1,7 @@
 // WRITE YOUR JS CODE HERE
 const nasaApiKey = "e1S0uOy1izehR795UEWjAQwGLVRoVstyEGBSvkAo";
 const apodBaseUrl = "https://api.nasa.gov/planetary/apod";
-
+const upcomingLaunchesUrl = "https://lldev.thespacedevs.com/2.3.0/launches/upcoming/";
 let allPlanetsData = [];
 let allLaunchesData = [];
 
@@ -124,7 +124,7 @@ async function fetchPlanetsData() {
 
 async function fetchUpcomingLaunches() {
     try {
-        const response = await fetch(`https:lldev.thespacedevs.com/2.3.0/launches/upcoming/?limit=10`);
+        const response = await fetch(`${upcomingLaunchesUrl}?limit=10`);
         const data = await response.json();
         allLaunchesData = data.results;
 
@@ -481,4 +481,5 @@ window.addEventListener("load", function() {
     fetchPlanetsData();
     fetchUpcomingLaunches();
 });
+
 
